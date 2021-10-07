@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<script id="vertex-shader" type="x-shader/x-vertex">
+    attribute  vec4 vPosition;
+    attribute  vec4 vColor;
+    varying vec4 fColor;
+    
+    uniform vec3 theta;
+    uniform float transX;
+    uniform float transY;
+    uniform mat4 modelView2;
+    
+    void main() 
+    {
+    
+        fColor = vColor;
+    
+        gl_Position = modelView2 * vPosition;
+    } 
+</script>
+<!-- gl_Position = rx * ry * rz * vPosition * modelView; -->
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+    precision mediump float;
+   
+    varying vec4 fColor;
+    
+    void
+    main()
+    {
+        gl_FragColor = fColor;
+    }
+</script>
+
+<script type="text/javascript" src="../Common/webgl-utils.js"></script>
+<script type="text/javascript" src="../Common/initShaders.js"></script>
+<script type="text/javascript" src="../Common/MV.js"></script>
+<script type="text/javascript" src="spinningCube.js"></script>
+<script type="text/javascript" src="createCube.js"></script>
+
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+<title>Spinning Cubes</title>
+
+<canvas id="gl-canvas" width="512" height="512" style="background-color:  #090339;">
+    Oops ... your browser doesn't support the HTML5 canvas element
+    </canvas>
+    <br />
+    Click canvas to add a cube
+    <br />
+    <button id = "rotateXButton">Rotate X</button>
+    <button id = "rotateYButton">Rotate Y</button>
+    <button id = "rotateZButton">Rotate Z</button>
+    <button id = "rotateRandom">Rotate Random Axis</button>
+    <br />
+    <div>
+    <script> 
+    var shout = 12;
+    </script>
+    scale cube
+    <span id="currentValuePercent"></span>% <input id="cubeScale" type="range" min="0" max="100", step="1" value="10"/> 100%
+    </div>
+    <script>
+        var scaleSlider = document.getElementById("cubeScale");
+        var minCheck = document.getElementById("currentValuePercent");
+
+        minCheck.innerHTML = scaleSlider.value;
+        scaleSlider.oninput = function() {
+            minCheck.innerHTML = scaleSlider.value;
+        }
+    </script> 
+    <div style="font-family:verdana";>
+        <h1> Interactive Cubes</h1>
+        <strong>Author: </strong>James Lord-Ender-Laing
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp        
+        <strong>Date: </strong>Februrary 28th 2020</br>
+        <strong>Description: </strong>This program allows a user to add rotating cubes to a canvas
+        <br />
+        <strong>Functionality: </strong></br>
+        
+        This program allows for users to click on the canvas (indicated by the blue area) and see a cube appear on where they clicked rotating in a random direction and at a random speed. The cubes are identical in terms of proportions and colors. The 4 buttons allow the axis of rotation to change to the axis matching the button pressed.
+        
+        <br />
+        <strong>Resources: </strong>Everything in the common folder: MV.js, initShaders.js, initShaders2.js, and webgl-utils.js. </br>
+        </br>
+    </div>
+    
